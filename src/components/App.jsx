@@ -1,17 +1,20 @@
 import React         from 'react';
-import { Emitter }   from '../modules';
+import {root}        from 'baobab-react/decorators';
+import { Emitter, State }   from '../modules';
 import Chat          from './Chat.jsx';
 import Servers       from './Servers.jsx';
 import Sidebar       from './Sidebar.jsx';
 import Accounts      from './Accounts.jsx';
 import Credits       from './Credits.jsx';
 
+
+@root(State)
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
       toggled: false,
-      state: 'chat'
+      state: 'servers'
     };
   }
 

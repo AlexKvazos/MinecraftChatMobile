@@ -1,8 +1,16 @@
 import React from 'react';
+import { branch } from 'baobab-react/decorators';
+import { UIActions } from '../actions';
 import { Emitter } from '../modules';
 import Header from './UI/Header.jsx';
 import AddServer from './Modals/AddServer.jsx';
 
+
+@branch({
+  cursors: {
+    servers: ['servers']
+  }
+})
 class Servers extends React.Component {
   constructor() {
     super();
@@ -16,10 +24,11 @@ class Servers extends React.Component {
   }
 
   componentWillUnmount() {
-    Emitter.removeListener('ui:modal:hide', ::this.hideHandler);
+    Emitter.removeAllListeners('ui:modal:hide');
   }
 
   hideHandler() {
+    UIActions.closeKeyboard();
     this.setState({ adding: false });
   }
 

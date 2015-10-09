@@ -1,18 +1,21 @@
-import React         from 'react'
+import React         from 'react';
+import { branch }    from 'baobab-react/decorators';
 import { UIActions } from '../actions';
 import Header        from './UI/Header.jsx';
 import MessageBox    from './UI/MessageBox.jsx';
 
+@branch({
+  cursors: {
+    connected: ['connected']
+  }
+})
 class Chat extends React.Component {
   constructor() {
     super();
-    this.state = {
-      connected: false
-    };
   }
 
   render() {
-    let connected = this.state.connected ? 'online' : 'offline';
+    let connected = this.props.connected ? 'online' : 'offline';
 
     return (
       <div>

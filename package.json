@@ -7,6 +7,8 @@
     "watch": "./node_modules/gulp/bin/gulp.js watch"
   },
   "dependencies": {
+    "baobab": "^2.0.0",
+    "baobab-react": "^1.0.0",
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
     "requireindex": "^1.1.0"

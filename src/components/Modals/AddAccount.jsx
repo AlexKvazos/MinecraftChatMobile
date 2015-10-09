@@ -10,7 +10,21 @@ class AddAcount extends React.Component {
       <div className={ `modal ${toggle}`}>
         <Header title='Add Account' showCancel={ true } />
 
-        <div className='container'></div>
+        <div className='container'>
+          <div className='formgroup'>
+            <label>Minecraft Username/Email</label>
+            <input type="text" ref='username' />
+          </div>
+
+          <div className='formgroup'>
+            <label>Password</label>
+            <input type="password" ref='password' />
+          </div>
+
+          <div className='btn btn-primary'>
+            Save
+          </div>
+        </div>
       </div>
     );
   }

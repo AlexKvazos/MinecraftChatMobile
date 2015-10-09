@@ -1,4 +1,5 @@
 import React from 'react';
+import { UIActions } from '../actions';
 import { Emitter } from '../modules';
 import Header from './UI/Header.jsx';
 import AddAccount from './Modals/AddAccount.jsx';
@@ -16,10 +17,11 @@ class Accounts extends React.Component {
   }
 
   componentWillUnmount() {
-    Emitter.removeListener('ui:modal:hide', ::this.hideHandler);
+    Emitter.removeAllListeners('ui:modal:hide');
   }
 
   hideHandler() {
+    UIActions.closeKeyboard();
     this.setState({ adding: false });
   }
 

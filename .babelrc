@@ -1,6 +1,7 @@
 
 {
   "optional": [
-    "es7.functionBind"
+    "es7.functionBind",
+    "es7.decorators"
   ]
 }

@@ -10,6 +10,15 @@ let UIActions = {
   },
 
   /**
+   * Force keyboard close
+   */
+  closeKeyboard() {
+    if (window.cordova && window.cordova.plugins.Keyboard) {
+      window.cordova.plugins.Keyboard.close();
+    }
+  },
+
+  /**
    * Show the keyboard
    */
   showKeyboard() {
