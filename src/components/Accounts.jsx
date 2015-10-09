@@ -1,9 +1,15 @@
 import React from 'react';
+import { branch } from 'baobab-react/decorators';
 import { UIActions } from '../actions';
 import { Emitter } from '../modules';
 import Header from './UI/Header.jsx';
 import AddAccount from './Modals/AddAccount.jsx';
 
+@branch({
+  cursors: {
+    accounts: ['accounts']
+  }
+})
 class Accounts extends React.Component {
   constructor() {
     super();
@@ -30,6 +36,8 @@ class Accounts extends React.Component {
   }
 
   render() {
+    let { accounts } = this.props;
+
     return (
       <div>
         <Header title='Accounts' showToggle={ true } button={(
@@ -39,14 +47,16 @@ class Accounts extends React.Component {
         )} />
 
         <div className='container'>
-          <div className='empty no-select'>
-            <p><i className='fa fa-users'></i></p>
-            <p>You haven't added any accounts!</p>
-            <p className='instructions'>
-              1. Tap the '+' button on the top right<br />
-              2. Input your account information and tap 'Save'.
-            </p>
-          </div>
+          { accounts.length ? null : (
+            <div className='empty no-select'>
+              <p><i className='fa fa-users'></i></p>
+              <p>You haven't added any accounts!</p>
+              <p className='instructions'>
+                1. Tap the '+' button on the top right<br />
+                2. Input your account information and tap 'Save'.
+              </p>
+            </div>
+          ) }
         </div>
 
         <AddAccount visible={ this.state.adding } />

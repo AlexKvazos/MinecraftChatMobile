@@ -1,6 +1,6 @@
 import React from 'react';
 import { branch } from 'baobab-react/decorators';
-import { UIActions } from '../actions';
+import { UIActions } from '../actions';
 import { Emitter } from '../modules';
 import Header from './UI/Header.jsx';
 import AddServer from './Modals/AddServer.jsx';
@@ -37,6 +37,8 @@ class Servers extends React.Component {
   }
 
   render() {
+    let { servers } = this.props;
+
     return (
       <div>
         <Header title='Servers' showToggle={ true } button={(
@@ -46,6 +48,8 @@ class Servers extends React.Component {
         )} />
 
         <div className='container'>
+
+        { servers.length ? null : (
           <div className='empty no-select'>
             <p><i className='fa fa-server'></i></p>
             <p>You haven't added any servers!</p>
@@ -57,6 +61,7 @@ class Servers extends React.Component {
               Note: MinecraftChat only works on 1.8 servers.
             </p>
           </div>
+        ) }
         </div>
 
         <AddServer visible={ this.state.adding } />
