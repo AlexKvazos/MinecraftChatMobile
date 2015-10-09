@@ -8,7 +8,16 @@ let ServerActions = {
    */
   add(server) {
     let { name, ip } = server;
+
+    // load servers disk storage
+    let servers = localStorage.servers
+      ? JSON.parse(localStorage.servers)
+      : [];
+    servers.push({ name, ip });
+
+    // push to application state and save to disk
     State.select('servers').push({ name, ip });
+    localStorage.servers = JSON.stringify(servers);
   }
 
 };

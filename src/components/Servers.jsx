@@ -1,9 +1,9 @@
-import React from 'react';
-import { branch } from 'baobab-react/decorators';
+import React         from 'react';
+import { branch }    from 'baobab-react/decorators';
 import { UIActions } from '../actions';
-import { Emitter } from '../modules';
-import Header from './UI/Header.jsx';
-import AddServer from './Modals/AddServer.jsx';
+import { Emitter }   from '../modules';
+import Header        from './UI/Header.jsx';
+import AddServer     from './Modals/AddServer.jsx';
 
 
 @branch({
@@ -40,7 +40,7 @@ class Servers extends React.Component {
     return (
       <div key={ index } className='server'>
         <div className='icon'>
-          <i className='fa fa-bolt'></i>
+          <i className='fa fa-cube'></i>
         </div>
         <div className='info'>
           <h3>{ server.name }</h3>
