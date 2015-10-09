@@ -1,12 +1,37 @@
 import React from 'react';
+import { Emitter } from '../modules';
 import Header from './UI/Header.jsx';
+import AddAccount from './Modals/AddAccount.jsx';
 
 class Accounts extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      adding: false
+    };
+  }
+
+  componentDidMount() {
+    Emitter.on('ui:modal:hide', ::this.hideHandler);
+  }
+
+  componentWillUnmount() {
+    Emitter.removeListener('ui:modal:hide', ::this.hideHandler);
+  }
+
+  hideHandler() {
+    this.setState({ adding: false });
+  }
+
+  addHandler() {
+    this.setState({ adding: true });
+  }
+
   render() {
     return (
       <div>
-        <Header title='Accounts' button={(
-          <div className='icon right'>
+        <Header title='Accounts' showToggle={ true } button={(
+          <div className='icon right' onTouchEnd={ ::this.addHandler }>
             <i className={ `fa fa-plus` }></i>
           </div>
         )} />
@@ -21,6 +46,8 @@ class Accounts extends React.Component {
             </p>
           </div>
         </div>
+
+        <AddAccount visible={ this.state.adding } />
 
       </div>
     );

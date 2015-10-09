@@ -29,6 +29,13 @@ let UIActions = {
    */
   newState(stateName) {
     Emitter.emit('ui:state:new', stateName);
+  },
+
+  /**
+   * Hide the active modal on the application
+   */
+  hideModal() {
+    Emitter.emit('ui:modal:hide');
   }
 
 };

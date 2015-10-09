@@ -81,6 +81,8 @@ function bundle() {
   }
 }
 
+gulp.task('bundle', bundle);
+
 // main build task
 gulp.task('build', gulp.series(
   'lint',

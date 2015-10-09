@@ -5,7 +5,7 @@ class Credits extends React.Component {
   render() {
     return (
       <div>
-        <Header title='Credits' />
+        <Header title='Credits' showToggle={ true } />
         <div className='container credits'>
           <h3>MinecraftChat</h3>
           <p>Copyright &copy; 2015 - MinecraftChat.net</p>

@@ -16,7 +16,7 @@ class Chat extends React.Component {
 
     return (
       <div>
-        <Header title='MinecraftChat' button={(
+        <Header title='MinecraftChat' showToggle={ true } button={(
           <div className='icon right'>
             <i className={ `fa fa-circle-thin ${connected}` }></i>
           </div>
