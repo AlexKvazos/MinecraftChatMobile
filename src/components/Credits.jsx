@@ -6,7 +6,15 @@ class Credits extends React.Component {
     return (
       <div>
         <Header title='Credits' />
-
+        <div className='container credits'>
+          <h3>MinecraftChat</h3>
+          <p>Copyright &copy; 2015 - MinecraftChat.net</p>
+          <p className='instructions'>
+            Developed by AlexKvazos<br />
+            contact@alexkvazos.com
+          </p>
+          <p className='note'>This service is not affiliated with Minecraft or Mojang</p>
+        </div>
       </div>
     );
   }
