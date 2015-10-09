@@ -4,7 +4,7 @@ import Chat          from './Chat.jsx';
 import Servers       from './Servers.jsx';
 import Sidebar       from './Sidebar.jsx';
 import Accounts      from './Accounts.jsx';
-import Credits       from './Credits.jsx'
+import Credits       from './Credits.jsx';
 
 class App extends React.Component {
   constructor() {
