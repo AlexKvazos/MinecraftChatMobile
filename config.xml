@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.ionicframework.mobile767019" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>Mobile</name>
+<widget id="net.minecraftchat.mobile" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+  <name>MinecraftChat</name>
   <description>
-        An Ionic Framework and Cordova project.
+        Chat on your favorite Minecraft servers from your iOS device!
     </description>
-  <author email="hi@ionicframework" href="http://ionicframework.com/">
-      Ionic Framework Team
+  <author email="contact@alexkvazos.com" href="https://minecraftchat.net/">
+      Alejandro Cavazos
     </author>
   <content src="index.html"/>
   <access origin="*"/>

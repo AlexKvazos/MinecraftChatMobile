@@ -3,6 +3,23 @@ import Header from '../UI/Header.jsx';
 
 class AddServer extends React.Component {
 
+  saveHandler() {
+    let servername = this.refs.servername.value;
+    let serverip   = this.refs.serverip.value;
+
+    // prevent empty submissions
+    if (!servername.length || !serverip.length) {
+      if (navigator.notification) {
+        navigator.notification.alert(
+          'Server Name and IP required',
+          () => {},
+          'Error'
+        );
+      }
+      return;
+    }
+  }
+
   render() {
     let toggle = this.props.visible ? 'visible' : '';
 
@@ -21,7 +38,7 @@ class AddServer extends React.Component {
             <input type="text" ref='serverip' />
           </div>
 
-          <div className='btn btn-primary'>
+          <div className='btn btn-primary' onTouchEnd={ ::this.saveHandler }>
             Save
           </div>
         </div>

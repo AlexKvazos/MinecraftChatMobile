@@ -1,7 +1,7 @@
 {
-  "name": "mobile",
+  "name": "MinecraftChat",
   "version": "1.0.0",
-  "description": "Mobile: An Ionic project",
+  "description": "MinecraftChat: Chat on your favorite Minecraft severs",
   "scripts": {
     "build": "./node_modules/gulp/bin/gulp.js build",
     "watch": "./node_modules/gulp/bin/gulp.js watch"
@@ -40,7 +40,8 @@
     "cordova-plugin-whitelist",
     "cordova-plugin-splashscreen",
     "com.ionic.keyboard",
-    "cordova-plugin-statusbar"
+    "cordova-plugin-statusbar",
+    "org.apache.cordova.dialogs"
   ],
   "cordovaPlatforms": [
     "ios"

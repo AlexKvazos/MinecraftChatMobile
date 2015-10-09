@@ -3,6 +3,23 @@ import Header from '../UI/Header.jsx';
 
 class AddAcount extends React.Component {
 
+  saveHandler() {
+    let username = this.refs.username.value;
+    let password   = this.refs.password.value;
+
+    // prevent empty submissions
+    if (!username.length || !password.length) {
+      if (navigator.notification) {
+        navigator.notification.alert(
+          'Username and password required',
+          () => {},
+          'Error'
+        );
+      }
+      return;
+    }
+  }
+
   render() {
     let toggle = this.props.visible ? 'visible' : '';
 
@@ -21,7 +38,7 @@ class AddAcount extends React.Component {
             <input type="password" ref='password' />
           </div>
 
-          <div className='btn btn-primary'>
+          <div className='btn btn-primary' onTouchEnd={ ::this.saveHandler }>
             Save
           </div>
         </div>
