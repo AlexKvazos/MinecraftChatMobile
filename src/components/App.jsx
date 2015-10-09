@@ -14,7 +14,7 @@ class App extends React.Component {
     super();
     this.state = {
       toggled: false,
-      state: 'servers'
+      state: 'chat'
     };
   }
 
