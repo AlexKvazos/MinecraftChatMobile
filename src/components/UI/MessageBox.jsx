@@ -1,5 +1,5 @@
 import React from 'react';
-import { Emitter } from '../modules';
+import { Emitter } from '../../modules';
 
 class MessageBox extends React.Component {
 
@@ -18,11 +18,15 @@ class MessageBox extends React.Component {
   }
 
   closeKeyboard() {
-    this.refs.input.blur();
+    if (this.refs.input) {
+      this.refs.input.blur();
+    }
   }
 
   showKeyboard() {
-    this.refs.input.focus();
+    if (this.refs.input) {
+      this.refs.input.focus();
+    }
   }
 
   onKeyboardShow(e) {

@@ -1,14 +1,26 @@
 import React         from 'react'
 import { UIActions } from '../actions';
-import Header        from './Header.jsx';
-import MessageBox    from './MessageBox.jsx';
+import Header        from './UI/Header.jsx';
+import MessageBox    from './UI/MessageBox.jsx';
 
 class Chat extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      connected: false
+    };
+  }
 
   render() {
+    let connected = this.state.connected ? 'online' : 'offline';
+
     return (
       <div>
-        <Header />
+        <Header title='MinecraftChat' button={(
+          <div className='icon right'>
+            <i className={ `fa fa-circle-thin ${connected}` }></i>
+          </div>
+        )} />
 
         <div
           className='messages'

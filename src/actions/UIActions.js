@@ -21,6 +21,14 @@ let UIActions = {
    */
   toggleSidebar() {
     Emitter.emit('ui:sidebar:toggle');
+  },
+
+  /**
+   * Set a new UI state
+   * @param  {String} stateName The statename to set
+   */
+  newState(stateName) {
+    Emitter.emit('ui:state:new', stateName);
   }
 
 };

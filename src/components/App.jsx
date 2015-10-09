@@ -1,21 +1,28 @@
 import React         from 'react';
 import { Emitter }   from '../modules';
 import Chat          from './Chat.jsx';
+import Servers       from './Servers.jsx';
+import Sidebar       from './Sidebar.jsx';
+import Accounts      from './Accounts.jsx';
+import Credits       from './Credits.jsx'
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      toggled: true
+      toggled: false,
+      state: 'chat'
     };
   }
 
   componentDidMount() {
     Emitter.on('ui:sidebar:toggle', ::this.toggleSidebar);
+    Emitter.on('ui:state:new', ::this.handleNewState);
   }
 
   componentWillUnmount() {
     Emitter.removeListener('ui:sidebar:toggle', ::this.toggleSidebar);
+    Emitter.removeListener('ui:state:new', ::this.handleNewState);
   }
 
   toggleSidebar() {
@@ -29,36 +36,33 @@ class App extends React.Component {
     }
   }
 
+  handleNewState(stateName) {
+    this.setState({
+      toggled: false,
+      state: stateName
+    });
+  }
+
   render() {
     let toggle = this.state.toggled ? 'toggle' : '';
+    let { state } = this.state;
+
+    let chat = state === 'chat' ? <Chat /> : null;
+    let servers = state === 'servers' ? <Servers /> : null;
+    let accounts = state === 'accounts' ? <Accounts /> : null;
+    let credits = state === 'credits' ? <Credits /> : null;
 
     return (
       <div className='wrapper'>
-
-      <div className='sidebar'>
-        <div className='header'>
-          Menu
+        <Sidebar />
+        <div
+          className={ `main ${toggle}` }
+          onTouchEnd={ ::this.handleMainTouch }>
+          { chat }
+          { servers }
+          { accounts }
+          { credits }
         </div>
-        <ul>
-          <li>Chat</li>
-          <li>Servers</li>
-          <li>Accounts</li>
-          <li>Credits</li>
-        </ul>
-        <div className='footer'>
-          <p>
-            Copyright &copy; 2015<br />
-            MinecraftChat.net
-          </p>
-        </div>
-      </div>
-
-      <div
-        className={ `main ${toggle}` }
-        onTouchEnd={ ::this.handleMainTouch }>
-        <Chat />
-      </div>
-
       </div>
     );
   }
