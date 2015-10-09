@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from '../UI/Header.jsx';
+import { ServerActions, UIActions } from '../../actions';
 
 class AddServer extends React.Component {
 
@@ -18,6 +19,12 @@ class AddServer extends React.Component {
       }
       return;
     }
+
+    // add server to store and reset modal
+    ServerActions.add({ name: servername, ip: serverip });
+    UIActions.hideModal();
+    this.refs.servername.value = '';
+    this.refs.serverip.value = '';
   }
 
   render() {

@@ -1,4 +1,5 @@
 
 export default {
-  UIActions: require('./UIActions')
+  UIActions: require('./UIActions'),
+  ServerActions: require('./ServerActions')
 };

@@ -36,6 +36,23 @@ class Servers extends React.Component {
     this.setState({ adding: true });
   }
 
+  renderServer(server, index) {
+    return (
+      <div key={ index } className='server'>
+        <div className='icon'>
+          <i className='fa fa-bolt'></i>
+        </div>
+        <div className='info'>
+          <h3>{ server.name }</h3>
+          <p>{ server.ip }</p>
+        </div>
+        <div className='caret'>
+          <i className='fa fa-chevron-right'></i>
+        </div>
+      </div>
+    );
+  }
+
   render() {
     let { servers } = this.props;
 
@@ -48,6 +65,8 @@ class Servers extends React.Component {
         )} />
 
         <div className='container'>
+
+        { this.props.servers.map(::this.renderServer) }
 
         { servers.length ? null : (
           <div className='empty no-select'>
