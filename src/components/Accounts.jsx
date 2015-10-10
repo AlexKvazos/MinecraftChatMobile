@@ -39,7 +39,7 @@ class Accounts extends React.Component {
     if (window.plugins && window.plugins.actionsheet) {
       window.plugins.actionsheet.show({
         title: `What do you want to do with ${account.username}?`,
-        addDestructiveButtonWithLabel: 'Delete account',
+        addDestructiveButtonWithLabel: 'Remove account',
         addCancelButtonWithLabel: 'Cancel'
       }, (btnIndex) => {
         if (btnIndex === 1) {
