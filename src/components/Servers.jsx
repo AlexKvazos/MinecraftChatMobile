@@ -47,7 +47,7 @@ class Servers extends React.Component {
           <p>{ server.ip }</p>
         </div>
         <div className='caret'>
-          <i className='fa fa-chevron-right'></i>
+          Last Connected: { server.lastconnect ? server.lastconnect : 'Never' }
         </div>
       </div>
     );

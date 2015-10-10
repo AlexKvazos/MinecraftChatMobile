@@ -41,7 +41,8 @@
     "cordova-plugin-splashscreen",
     "com.ionic.keyboard",
     "cordova-plugin-statusbar",
-    "org.apache.cordova.dialogs"
+    "org.apache.cordova.dialogs",
+    "cordova-plugin-actionsheet"
   ],
   "cordovaPlatforms": [
     "ios"
