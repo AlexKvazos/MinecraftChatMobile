@@ -42,10 +42,10 @@ class Accounts extends React.Component {
           <i className='fa fa-user'></i>
         </div>
         <div className='info'>
-          <h4>{ account.username }</h4>
-        </div>
-        <div className='caret'>
-          Last Used: { account.lastconnect ? account.lastconnect : 'Never' }
+          <h3>{ account.username }</h3>
+          <p>
+            Last Used: { account.lastconnect ? account.lastconnect : 'Never' }
+          </p>
         </div>
       </div>
     );
