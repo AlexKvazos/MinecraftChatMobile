@@ -18,6 +18,20 @@ let ServerActions = {
     // push to application state and save to disk
     State.select('servers').push({ name, ip });
     localStorage.servers = JSON.stringify(servers);
+  },
+
+  /**
+   * Delete a server from the store
+   * @param  {int}   index Server index
+   */
+  delete(index) {
+    let servers = localStorage.servers
+      ? JSON.parse(localStorage.servers)
+      : [];
+    servers.splice(index, 1);
+
+    State.select('servers').splice([index, 1]);
+    localStorage.servers = JSON.stringify(servers);
   }
 
 };

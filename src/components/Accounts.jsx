@@ -1,6 +1,6 @@
 import React from 'react';
 import { branch } from 'baobab-react/decorators';
-import { UIActions } from '../actions';
+import { UIActions, AccountActions } from '../actions';
 import { Emitter } from '../modules';
 import Header from './UI/Header.jsx';
 import AddAccount from './Modals/AddAccount.jsx';
@@ -35,9 +35,23 @@ class Accounts extends React.Component {
     this.setState({ adding: true });
   }
 
+  handleAccountTap(index, account) {
+    if (window.plugins && window.plugins.actionsheet) {
+      window.plugins.actionsheet.show({
+        title: `What do you want to do with ${account.username}?`,
+        addDestructiveButtonWithLabel: 'Delete account',
+        addCancelButtonWithLabel: 'Cancel'
+      }, (btnIndex) => {
+        if (btnIndex === 1) {
+          AccountActions.delete(index);
+        }
+      });
+    }
+  }
+
   renderAccount(account, index) {
     return (
-      <div key={ index } className='server'>
+      <div key={ index } className='server' onTouchEnd={ this.handleAccountTap.bind(this, index, account) }>
         <div className='icon'>
           <i className='fa fa-user'></i>
         </div>

@@ -18,6 +18,20 @@ let AccountActions = {
     // push to applicaton state and save to disk
     State.select('accounts').push({ username, password });
     localStorage.accounts = JSON.stringify(accounts);
+  },
+
+  /**
+   * Delete an account from the store
+   * @param  {int}   index Account index
+   */
+  delete(index) {
+    let accounts = localStorage.accounts
+      ? JSON.parse(localStorage.accounts)
+      : [];
+    accounts.splice(index, 1);
+
+    State.select('accounts').splice([index, 1]);
+    localStorage.accounts = JSON.stringify(accounts);
   }
 
 };

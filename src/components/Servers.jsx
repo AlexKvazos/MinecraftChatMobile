@@ -1,6 +1,6 @@
 import React         from 'react';
 import { branch }    from 'baobab-react/decorators';
-import { UIActions } from '../actions';
+import { UIActions, ServerActions } from '../actions';
 import { Emitter }   from '../modules';
 import Header        from './UI/Header.jsx';
 import AddServer     from './Modals/AddServer.jsx';
@@ -36,9 +36,23 @@ class Servers extends React.Component {
     this.setState({ adding: true });
   }
 
+  handleServerTap(index, server) {
+    if (window.plugins && window.plugins.actionsheet) {
+      window.plugins.actionsheet.show({
+        title: `What do you want to do with ${server.name}?`,
+        addDestructiveButtonWithLabel: 'Delete server',
+        addCancelButtonWithLabel: 'Cancel'
+      }, (btnIndex) => {
+        if (btnIndex === 1) {
+          ServerActions.delete(index);
+        }
+      });
+    }
+  }
+
   renderServer(server, index) {
     return (
-      <div key={ index } className='server'>
+      <div key={ index } className='server' onTouchEnd={ this.handleServerTap.bind(this, index, server) }>
         <div className='icon'>
           <i className='fa fa-cube'></i>
         </div>
