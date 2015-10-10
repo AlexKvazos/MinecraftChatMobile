@@ -8,7 +8,8 @@ import Welcome       from './UI/Welcome.jsx';
 
 @branch({
   cursors: {
-    connected: ['connected']
+    connected: ['connected'],
+    connecting: ['connecting']
   }
 })
 class Chat extends React.Component {
@@ -18,14 +19,19 @@ class Chat extends React.Component {
 
 
   render() {
-    let { connected } = this.props;
-    let indicator = connected ? 'online' : 'offline';
+    let { connected, connecting } = this.props;
+
+    let iconRight = connected
+      ? <i className={ `fa fa-circle online` }></i>
+      : (connecting
+        ? <i className={ `fa fa-circle-thin changing` }></i>
+        : <i className={ `fa fa-circle-thin offline` }></i>);
 
     return (
       <div>
         <Header title='MinecraftChat' showToggle={ true } button={(
           <div className='icon right'>
-            <i className={ `fa fa-circle-thin ${indicator}` }></i>
+            { iconRight }
           </div>
         )} />
 
