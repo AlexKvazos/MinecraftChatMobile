@@ -76,6 +76,16 @@ let SocketActions = {
       hostname: server.ip.indexOf(':') > -1 ? server.ip.split(':')[0] : server.ip,
       port: server.ip.indexOf(':') > -1 ? server.ip.split(':')[1] : 25565
     });
+  },
+
+  /**
+   * Only way to be 100% sure that we do not connect is to reinitilize
+   * the socket connection. Any other method can leak memory on the server
+   * and/or client.
+   */
+  cancelConnect() {
+    socket.disconnect();
+    socket.connect();
   }
 
 };
