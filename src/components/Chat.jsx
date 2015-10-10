@@ -69,43 +69,6 @@ class Chat extends React.Component {
     this.setState({ activeAccount: index });
   }
 
-  renderServer(server, index) {
-    return (
-      <div
-        key={ index }
-        className='server-selector'
-        onTouchEnd={ this.serverChangeHandler.bind(this, index) }>
-        <div className='info'>
-          <h3>{ server.name }</h3>
-          <p>{ server.ip }</p>
-        </div>
-        { this.state.activeServer === index ? (
-          <div className='caret'>
-            <i className='fa fa-check-circle-o'></i>
-          </div>
-        ) : null }
-      </div>
-    );
-  }
-
-  renderAccount(account, index) {
-    return (
-      <div
-        key={ index }
-        className='account-selector'
-        onTouchEnd={ this.accountChangeHandler.bind(this, index) }>
-        <div className='info'>
-          <h3>{ account.username }</h3>
-        </div>
-        { this.state.activeAccount === index ? (
-          <div className='caret'>
-            <i className='fa fa-check-circle-o'></i>
-          </div>
-        ) : null }
-      </div>
-    );
-  }
-
   render() {
     let { connected, servers, accounts } = this.props;
     let indicator = connected ? 'online' : 'offline';
@@ -127,13 +90,27 @@ class Chat extends React.Component {
           <div className='container'>
             <div className='formgroup'>
               <label className='selector-title'>Server</label>
-              { servers.map(::this.renderServer) }
+              <div className='select-control'>
+                <div className='arrow'><i className='fa fa-chevron-down'></i></div>
+                <select>
+                  { servers.map((server, i) => {
+                    return <option key={ i } value={ i }>{ server.name }</option>;
+                  }) }
+                </select>
+              </div>
             </div>
 
             {/* Account selection */}
             <div className='formgroup'>
               <label className='selector-title'>Account</label>
-              { accounts.map(::this.renderAccount) }
+              <div className='select-control'>
+                <div className='arrow'><i className='fa fa-chevron-down'></i></div>
+                <select>
+                  { accounts.map((account, i) => {
+                    return <option key={ i } value={ i }>{ account.username }</option>;
+                  }) }
+                </select>
+              </div>
             </div>
 
             <div className='btn btn-primary' onTouchEnd={ ::this.connectHandler }>
