@@ -1,23 +1,27 @@
 import React from 'react';
 import { branch } from 'baobab-react/decorators';
+import { SocketActions } from '../../actions';
 
 @branch({
   cursors: {
     servers: ['servers'],
-    accounts: ['accounts']
+    accounts: ['accounts'],
+    connecting: ['connecting']
   }
 })
 class Connect extends React.Component {
 
   handleConnect() {
-    let acount = this.props.accounts[this.refs.activeAccount.value];
+    let account = this.props.accounts[this.refs.activeAccount.value];
     let server = this.props.servers[this.refs.activeServer.value];
+
+    SocketActions.connect(server, account);
   }
 
   render() {
-    let { servers, accounts } = this.props;
+    let { servers, accounts, connecting } = this.props;
 
-    if (!servers.length || !accounts.length) {
+    if (!servers.length || !accounts.length || connecting) {
       return null;
     }
 
