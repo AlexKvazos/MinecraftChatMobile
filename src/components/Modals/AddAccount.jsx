@@ -1,11 +1,12 @@
 import React from 'react';
 import Header from '../UI/Header.jsx';
+import { AccountActions, UIActions } from '../../actions';
 
 class AddAcount extends React.Component {
 
   saveHandler() {
     let username = this.refs.username.value;
-    let password   = this.refs.password.value;
+    let password = this.refs.password.value;
 
     // prevent empty submissions
     if (!username.length || !password.length) {
@@ -18,6 +19,12 @@ class AddAcount extends React.Component {
       }
       return;
     }
+
+    // add account to store and reset modal
+    AccountActions.add({ username, password });
+    UIActions.hideModal();
+    this.refs.username.value = '';
+    this.refs.password.value = '';
   }
 
   render() {

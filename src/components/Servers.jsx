@@ -66,7 +66,7 @@ class Servers extends React.Component {
 
         <div className='container'>
 
-        { this.props.servers.map(::this.renderServer) }
+        { servers.map(::this.renderServer) }
 
         { servers.length ? null : (
           <div className='empty no-select'>

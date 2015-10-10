@@ -35,6 +35,22 @@ class Accounts extends React.Component {
     this.setState({ adding: true });
   }
 
+  renderAccount(account, index) {
+    return (
+      <div key={ index } className='server'>
+        <div className='icon'>
+          <i className='fa fa-user'></i>
+        </div>
+        <div className='info'>
+          <h4>{ account.username }</h4>
+        </div>
+        <div className='caret'>
+          Last Used: { account.lastconnect ? account.lastconnect : 'Never' }
+        </div>
+      </div>
+    );
+  }
+
   render() {
     let { accounts } = this.props;
 
@@ -47,6 +63,9 @@ class Accounts extends React.Component {
         )} />
 
         <div className='container'>
+
+          { accounts.map(::this.renderAccount) }
+
           { accounts.length ? null : (
             <div className='empty no-select'>
               <p><i className='fa fa-users'></i></p>
