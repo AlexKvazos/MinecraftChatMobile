@@ -239,7 +239,8 @@ body {
     margin: 0;
   }
 
-  input {
+  input, select {
+    -webkit-appearance: none;
     display: block;
     width: 100%;
     box-sizing: border-box;
@@ -265,6 +266,14 @@ body {
 
   &.btn-primary {
     background: #1f6bc6;
+  }
+
+  &.btn-connect {
+    background: rgb(72, 131, 20);
+    width: 100px;
+    padding: 5px 0;
+    color: #fff;
+    display: inline-block;
   }
 }
 

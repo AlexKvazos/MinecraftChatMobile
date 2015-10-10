@@ -22,7 +22,7 @@ class Sidebar extends React.Component {
           <li onTouchEnd={ this.newState('accounts') }>Accounts</li>
           <li onTouchEnd={ this.newState('credits') }>Credits</li>
         </ul>
-        <div className='footer'>
+        <div className='footer no-select'>
           <p>
             Copyright &copy; 2015<br />
             MinecraftChat.net

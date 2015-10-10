@@ -20,7 +20,6 @@ function init() {
   // prevent keyboard scrolling our view
   if (window.cordova && window.cordova.plugins.Keyboard) {
     window.cordova.plugins.Keyboard.disableScroll(true);
-    window.cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
   }
 
   // render application
