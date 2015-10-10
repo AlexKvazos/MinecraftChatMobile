@@ -1,7 +1,6 @@
 import React         from 'react';
 import { branch }    from 'baobab-react/decorators';
 import { UIActions } from '../actions';
-import { Emitter }   from '../modules';
 import Header        from './UI/Header.jsx';
 import MessageBox    from './UI/MessageBox.jsx';
 
@@ -9,64 +8,19 @@ import MessageBox    from './UI/MessageBox.jsx';
   cursors: {
     connected: ['connected'],
     servers: ['servers'],
-    accounts: ['accounts']
+    accounts: ['accounts'],
+    connecting: ['connecting']
   }
 })
 class Chat extends React.Component {
   constructor() {
     super();
-    this.state = {
-      connecting: false,
-      activeServer: 0,
-      activeAccount: 0
-    };
   }
 
-  makeConnection() {
-    let acount = this.props.accounts[this.state.activeAccount];
-    let server = this.props.servers[this.state.activeServer];
+  handleConnect() {
+    let acount = this.props.accounts[this.refs.activeAccount.value];
+    let server = this.props.servers[this.refs.activeServer.value];
 
-    UIActions.hideModal();
-  }
-
-  componentDidMount() {
-    Emitter.on('ui:modal:hide', ::this.hideHandler);
-  }
-
-  componentWillUnmount() {
-    Emitter.removeAllListeners('ui:modal:hide');
-  }
-
-  hideHandler() {
-    UIActions.closeKeyboard();
-    this.setState({ connecting: false });
-  }
-
-  addHandler() {
-    this.setState({ connecting: true });
-  }
-
-  connectHandler() {
-    if (!this.props.accounts.length) {
-      if (navigator.notification) {
-        navigator.notification.alert(
-          'You must add at least one account',
-          () => UIActions.newState('accounts'),
-          'Error'
-        );
-      }
-      return;
-    }
-
-    this.setState({ connecting: true });
-  }
-
-  serverChangeHandler(index) {
-    this.setState({ activeServer: index });
-  }
-
-  accountChangeHandler(index) {
-    this.setState({ activeAccount: index });
   }
 
   render() {
@@ -88,11 +42,13 @@ class Chat extends React.Component {
 
         { connected ? null : (
           <div className='container'>
+
+            {/* server selection */}
             <div className='formgroup'>
               <label className='selector-title'>Server</label>
               <div className='select-control'>
                 <div className='arrow'><i className='fa fa-chevron-down'></i></div>
-                <select>
+                <select ref='activeServer'>
                   { servers.map((server, i) => {
                     return <option key={ i } value={ i }>{ server.name }</option>;
                   }) }
@@ -100,12 +56,12 @@ class Chat extends React.Component {
               </div>
             </div>
 
-            {/* Account selection */}
+            {/* account selection */}
             <div className='formgroup'>
               <label className='selector-title'>Account</label>
               <div className='select-control'>
                 <div className='arrow'><i className='fa fa-chevron-down'></i></div>
-                <select>
+                <select ref='activeAccount'>
                   { accounts.map((account, i) => {
                     return <option key={ i } value={ i }>{ account.username }</option>;
                   }) }
@@ -113,9 +69,11 @@ class Chat extends React.Component {
               </div>
             </div>
 
-            <div className='btn btn-primary' onTouchEnd={ ::this.connectHandler }>
+            {/* = connect = */}
+            <div className='btn btn-primary' onTouchEnd={ ::this.handleConnect }>
               Connect
             </div>
+
           </div>
         )}
 

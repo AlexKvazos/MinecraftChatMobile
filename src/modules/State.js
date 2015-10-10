@@ -6,8 +6,11 @@ let accounts = localStorage.accounts ? JSON.parse(localStorage.accounts) : null;
 
 let state = new Baobab({
   connected: false,
+  connecting: false,
+
   servers: servers || [],
   accounts: accounts || []
+
 });
 
 export default state;
