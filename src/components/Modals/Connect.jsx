@@ -10,64 +10,85 @@ import Header from '../UI/Header.jsx';
   }
 })
 class Connect extends React.Component {
-  constructor() {
+  constructor(props) {
     super();
     this.state = {
-      showCustom: false
+      activeServer: 0,
+      activeAccount: 0
     };
   }
 
   connectHandler() {
-    let serverIndex = this.refs.server.value;
-    let accountIndex = this.refs.account.value;
-
-    // account we will use to sign in
-    let acount = this.props.accounts[accountIndex];
-
-    // server we will sign into
-    let server = serverIndex === 'custom'
-      ? this.refs.customServer.value
-      : this.props.servers[serverIndex].ip;
+    let acount = this.props.accounts[this.state.activeAccount];
+    let server = this.props.servers[this.state.activeServer];
 
     UIActions.hideModal();
   }
 
-  serverChangeHandler() {
-    if (this.refs.server.value === 'custom') {
-      this.setState({ showCustom: true });
-    } else {
-      this.setState({ showCustom: false });
-    }
+  serverChangeHandler(index) {
+    this.setState({ activeServer: index });
+  }
+
+  accountChangeHandler(index) {
+    this.setState({ activeAccount: index });
+  }
+
+  renderServer(server, index) {
+    return (
+      <div
+        key={ index }
+        className='server-selector'
+        onTouchEnd={ this.serverChangeHandler.bind(this, index) }>
+        <div className='info'>
+          <h3>{ server.name }</h3>
+          <p>{ server.ip }</p>
+        </div>
+        { this.state.activeServer === index ? (
+          <div className='caret'>
+            <i className='fa fa-check-circle-o'></i>
+          </div>
+        ) : null }
+      </div>
+    );
+  }
+
+  renderAccount(account, index) {
+    return (
+      <div
+        key={ index }
+        className='account-selector'
+        onTouchEnd={ this.accountChangeHandler.bind(this, index) }>
+        <div className='info'>
+          <h3>{ account.username }</h3>
+        </div>
+        { this.state.activeAccount === index ? (
+          <div className='caret'>
+            <i className='fa fa-check-circle-o'></i>
+          </div>
+        ) : null }
+      </div>
+    );
   }
 
   render() {
     let toggle = this.props.visible ? 'visible' : '';
+    let { servers, accounts } = this.props;
 
     return (
       <div className={ `modal ${toggle}`}>
         <Header title='Connect' showCancel={ true } />
 
+        {/* Server selection */}
         <div className='container'>
           <div className='formgroup'>
-            <label>Server</label>
-            <select ref='server' onChange={ ::this.serverChangeHandler }>
-              { this.props.servers.map((server, index) => {
-                return <option key={ index } value={ index }>{ server.name }</option>;
-              }) }
-              <option value='custom'>Enter custom IP...</option>
-            </select>
-            { this.state.showCustom
-               ? (<input type="text" ref='customServer' />)
-               : null }
+            <label className='selector-title'>Server</label>
+            { servers.map(::this.renderServer) }
           </div>
 
+          {/* Account selection */}
           <div className='formgroup'>
-            <label>Account</label>
-            <select ref='account'>
-              { this.props.accounts.map((account, index) => {
-                return <option key={ index } value={ index }>{ account.username }</option>;
-              }) }
-            </select>
+            <label className='selector-title'>Account</label>
+            { accounts.map(::this.renderAccount) }
           </div>
 
           <div className='btn btn-primary' onTouchEnd={ ::this.connectHandler }>

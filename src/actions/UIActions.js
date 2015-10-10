@@ -6,7 +6,9 @@ let UIActions = {
    * Hide the keyboard
    */
   hideKeyboard() {
-    Emitter.emit('ui:keyboard:close');
+    if (window.cordova && window.cordova.plugins.Keyboard.isVisible) {
+      Emitter.emit('ui:keyboard:close');
+    }
   },
 
   /**
