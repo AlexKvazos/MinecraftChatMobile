@@ -36,7 +36,6 @@ class Connect extends React.Component {
         <div className='connecting'>
           <p><i className='fa fa-refresh fa-spin'></i></p>
           <h4>Connecting</h4>
-          <div className='btn btn-cancel' onTouchEnd={ ::this.cancelConnect }>Cancel</div>
         </div>
       ) : (
         <div>
