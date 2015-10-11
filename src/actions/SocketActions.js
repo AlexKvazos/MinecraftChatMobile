@@ -1,5 +1,5 @@
 import io from 'socket.io-client';
-import { State } from '../modules';
+import { Emitter, State } from '../modules';
 
 // connect to service
 let socket = io('https://minecraftchat.net');
@@ -40,6 +40,7 @@ socket.on('disconnect', () => {
 
 socket.on('bot:message', (message) => {
   State.select('messages').push(message);
+  Emitter.emit('newMessage');
 });
 
 socket.on('buffer:error', function(error) {
@@ -94,6 +95,16 @@ let SocketActions = {
       hostname: server.ip.indexOf(':') > -1 ? server.ip.split(':')[0] : server.ip,
       port: server.ip.indexOf(':') > -1 ? server.ip.split(':')[1] : 25565
     });
+  },
+
+  /**
+   * Gracefully disconnect from the current server
+   */
+  disconnect() {
+    socket.emit('bot:disconnect');
+    State.set('conecting', false);
+    State.set('connected', false);
+    State.set('messages', []);
   },
 
   /**

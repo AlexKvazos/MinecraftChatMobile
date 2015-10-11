@@ -57,9 +57,7 @@ class Accounts extends React.Component {
         </div>
         <div className='info'>
           <h3>{ account.username }</h3>
-          <p>
-            Last Used: { account.lastconnect ? account.lastconnect : 'Never' }
-          </p>
+          <p>Last used: { account.lastconnect || 'Never' }</p>
         </div>
       </div>
     );
