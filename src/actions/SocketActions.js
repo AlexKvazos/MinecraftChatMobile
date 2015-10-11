@@ -40,7 +40,6 @@ socket.on('disconnect', () => {
 
 socket.on('bot:message', (message) => {
   State.select('messages').push(message);
-  console.log('message: ' + message);
 });
 
 socket.on('buffer:error', function(error) {
