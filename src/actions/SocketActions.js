@@ -6,22 +6,41 @@ let socket = io('https://minecraftchat.net');
 
 // save connection state on connect
 socket.on('bot:connect', (data) => {
+  if (window.cordova) {
+    window.cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+  }
   State.set('connecting', false);
   State.set('connected', {
     host: data.host,
     port: data.port,
     username: data.username
   });
+  console.log('bot connected');
 });
 
 socket.on('bot:disconnect', () => {
+  if (window.cordova) {
+    window.cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
+  }
+  State.set('messages', []);
   State.set('connecting', false);
   State.set('connected', false);
+  console.log('bot disconnected');
 });
 
 socket.on('disconnect', () => {
+  if (window.cordova) {
+    window.cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
+  }
+  State.set('messages', []);
   State.set('connecting', false);
-  State.set('conected', false);
+  State.set('connected', false);
+  console.log('socket disconnected');
+});
+
+socket.on('bot:message', (message) => {
+  State.select('messages').push(message);
+  console.log('message: ' + message);
 });
 
 socket.on('buffer:error', function(error) {

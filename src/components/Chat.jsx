@@ -9,17 +9,32 @@ import Welcome       from './UI/Welcome.jsx';
 @branch({
   cursors: {
     connected: ['connected'],
-    connecting: ['connecting']
+    connecting: ['connecting'],
+    messages: ['messages']
   }
 })
 class Chat extends React.Component {
-  constructor() {
-    super();
+
+  componentDidMount() {
+    window.addEventListener('native.keyboardshow', ::this.onKeyboardShow);
+    window.addEventListener('native.keyboardhide', ::this.onKeyboardHide);
   }
 
+  componentWillUnmount() {
+    window.removeEventListener('native.keyboardshow', ::this.onKeyboardShow);
+    window.removeEventListener('native.keyboardhide', ::this.onKeyboardHide);
+  }
+
+  onKeyboardShow(e) {
+    this.refs.messages.style.bottom = `${e.keyboardHeight+40}px`;
+  }
+
+  onKeyboardHide(e) {
+    this.refs.messages.style.bottom = '0px';
+  }
 
   render() {
-    let { connected, connecting } = this.props;
+    let { connected, connecting, messages } = this.props;
 
     let iconRight = connected
       ? <i className={ `fa fa-circle online` }></i>
@@ -39,8 +54,17 @@ class Chat extends React.Component {
           className='messages'
           onTouchEnd={ UIActions.hideKeyboard } >
 
-          { <Welcome /> }
+          { messages.map((message, i) => {
+            return <p key={ i } dangerouslySetInnerHTML={{ __html: message }} />;
+          }) }
         </div>
+
+        {/* welcome screen */}
+        { connected ? null : (
+          <div className='container'>
+            <Welcome />
+          </div>
+        ) }
 
         { connected ? <MessageBox /> : <Connect />}
       </div>

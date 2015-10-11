@@ -9,7 +9,8 @@ let state = new Baobab({
   connecting: false,
 
   servers: servers || [],
-  accounts: accounts || []
+  accounts: accounts || [],
+  messages: []
 
 });
 
