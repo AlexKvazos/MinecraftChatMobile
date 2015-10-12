@@ -54,11 +54,11 @@ gulp.task('lint', function() {
     .on('error', gutil.log);
 });
 
-var b = watchify(browserify({
+var b = browserify({
   entries: 'src/app.js',
   transform: [babelify],
   debug: debug
-}));
+});
 
 // bundle javascript
 function bundle() {
@@ -96,6 +96,7 @@ gulp.task('watch', function() {
   debug = true;
   b.on('update', bundle);
   b.on('log', gutil.log);
+  b = watchify(b);
   bundle();
 
   livereload.listen();
