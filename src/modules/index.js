@@ -1,5 +1,6 @@
 
 export default {
   Emitter: require('./Emitter'),
-  State: require('./State')
+  State: require('./State'),
+  Socket: require('./Socket')
 };
