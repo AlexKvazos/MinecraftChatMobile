@@ -1,4 +1,5 @@
 import React from 'react';
+import { SocketActions } from '../../actions';
 import { Emitter } from '../../modules';
 
 class MessageBox extends React.Component {
@@ -29,6 +30,12 @@ class MessageBox extends React.Component {
     }
   }
 
+  sendMessage() {
+    let message = this.refs.input.value;
+    SocketActions.sendMessage(message);
+    this.refs.input.value = '';
+  }
+
   onKeyboardShow(e) {
     this.refs.msgbox.style.bottom = `${e.keyboardHeight}px`;
   }
@@ -43,7 +50,7 @@ class MessageBox extends React.Component {
         <div className='holder'>
           <input type='text' ref='input' />
         </div>
-        <div className='send'>Send</div>
+        <div className='send' onTouchEnd={ ::this.sendMessage }>Send</div>
       </div>
     );
   }

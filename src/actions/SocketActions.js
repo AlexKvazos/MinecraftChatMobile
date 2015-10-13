@@ -48,6 +48,10 @@ let SocketActions = {
   cancelConnect() {
     Socket.disconnect();
     Socket.connect();
+  },
+
+  sendMessage(message) {
+    Socket.emit('chat', { message });
   }
 
 };
