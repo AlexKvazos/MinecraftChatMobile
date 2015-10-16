@@ -1,6 +1,6 @@
 {
-  "name": "Mobile",
-  "app_id": "",
+  "name": "MinecraftChat",
+  "app_id": "net.minecraftchat.ios",
   "gulpStartupTasks": [
     "sass",
     "watch"
