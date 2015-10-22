@@ -3,7 +3,7 @@ import State from './State';
 import Emitter from './Emitter';
 
 // connect to service
-let socket = io('https://minecraftchat.net');
+let socket = io('https://service.minecraftchat.net');
 
 /**
  * Emitted when the minecraft client succesfully connects to server
